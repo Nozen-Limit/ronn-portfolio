@@ -10,7 +10,6 @@ import Process from "@/components/v2/Process";
 import Offer from "@/components/v2/Offer";
 import Clients from "@/components/Clients";
 import Contact2 from "@/components/v2/Contact2";
-import VersionSwitch from "@/components/VersionSwitch";
 
 export const metadata: Metadata = {
   title: "Ronn Tristan — Video Editing & Design",
@@ -47,7 +46,6 @@ export default function V2() {
         <Clients />
         <Contact2 />
       </main>
-      <VersionSwitch />
     </>
   );
 }
