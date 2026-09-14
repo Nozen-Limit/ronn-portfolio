@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   RONN TRISTAN — design tokens
+
+   Deliberately single-theme. The reference design is pure black with
+   violet/mint gradients; a light variant would be a different product, not
+   the same one inverted. Every colour is therefore painted explicitly so
+   the page holds regardless of the viewer's system setting.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  --void:      #000000;
+  --surface:   #08080c;
+  --surface-2: #0e0e15;
+
+  --ink:       #ffffff;
+  --muted:     #9b9ba8;
+  --dim:       #6b6b78;
+
+  /* Violet carries the brand; mint only ever appears inside gradients,
+     never as a flat fill — that's what keeps the accent singular. */
+  --violet:    #a855f7;
+  --lavender:  #c3a6f5;
+  --grape:     #7c3aed;
+  --mint:      #8fe3e8;
+
+  --edge:      rgb(168 85 247 / 0.18);
+  --edge-lit:  rgb(168 85 247 / 0.55);
+  --glow:      rgb(168 85 247 / 0.35);
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-violet: var(--violet);
+  --color-lavender: var(--lavender);
+  --color-grape: var(--grape);
+  --color-mint: var(--mint);
+  --font-display: var(--font-outfit);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Clears the fixed nav when jumping to an anchor. */
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--grape);
+  color: #fff;
+}
+
+/* Visible keyboard focus everywhere, since much of this page is clickable. */
+:focus-visible {
+  outline: 2px solid var(--lavender);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Type
+   The reference sets headings very large, tight and wide-tracking-negative,
+   with one word per heading picked out in lavender. .accent is that word.
+   -------------------------------------------------------------------------- */
+
+.display {
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--lavender);
+  font-weight: 800;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* --------------------------------------------------------------------------
+   Surfaces
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--edge);
+  border-radius: 1.25rem;
+  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* The lit corner on the reference's "Elite" cards. */
+.card-lit {
+  border-color: var(--edge-lit);
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgb(124 58 237 / 0.5), transparent 55%),
+    linear-gradient(180deg, var(--surface-2), var(--surface));
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--edge-lit);
+  background: linear-gradient(90deg, rgb(10 10 15 / 0.9), var(--grape));
+  color: var(--ink);
+  cursor: pointer;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.pill:hover {
+  box-shadow: 0 0 34px -6px var(--glow);
+  border-color: var(--violet);
+}
+
+.pill-ghost {
+  background: transparent;
+  border-color: var(--edge);
+}
+
+.pill-ghost:hover {
+  background: rgb(168 85 247 / 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Motion
+   Every animated element below also has a no-motion resting state, so
+   disabling animation never leaves anything invisible.
+   -------------------------------------------------------------------------- */
+
+@keyframes drift {
+  0%,
+  100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  33%  { transform: translate3d(3%, -4%, 0) rotate(6deg) scale(1.06); }
+  66%  { transform: translate3d(-3%, 3%, 0) rotate(-5deg) scale(0.96); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
