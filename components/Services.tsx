@@ -5,8 +5,7 @@
    One card is open at a time. On wide screens the open card takes extra
    horizontal space and the others shrink — that flex-basis change is the
    whole interaction, and it maps directly to the reference, where one card
-   sits wider and lit while its neighbours stay narrow. Below that width
-   they stack and expand downward instead, because five cards sharing a
+   sits wider and lit while its neighbours stay narrow. Below xl they stack and expand downward instead, because five cards sharing a
    phone's width would leave nothing legible. */
 
 import { useState } from "react";
@@ -29,7 +28,10 @@ export default function Services() {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <div className="mt-8 flex flex-col gap-3 lg:h-[300px] lg:flex-row">
+        {/* Row layout starts at xl, not lg. At exactly 1024 five collapsed
+            cards get about 130px each — too narrow for the longest service
+            name, which clipped. iPad landscape stacks instead. */}
+        <div className="mt-8 flex flex-col gap-3 xl:h-[300px] xl:flex-row">
           {SERVICES.items.map((item, i) => {
             const isOpen = open === i;
             return (
@@ -60,7 +62,11 @@ export default function Services() {
                   </svg>
                 </span>
 
-                <h3 className="max-w-[8ch] text-xl leading-tight lg:max-w-none">
+                {/* No width cap: below lg these cards stack full-width, so an 8ch
+                    limit clipped any word longer than it — "development" was
+                    being cut off. At xl the column is narrow enough to wrap
+                    the text on its own. */}
+                <h3 className="text-xl leading-tight">
                   {item.title}
                 </h3>
 
