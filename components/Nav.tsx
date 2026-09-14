@@ -7,7 +7,9 @@
 import { useEffect, useState } from "react";
 import { BRAND, NAV } from "@/lib/content";
 
-export default function Nav() {
+/* links defaults to the v1 nav, so v1 renders exactly as before and v2 can
+   pass its own section list without a second copy of this component. */
+export default function Nav({ links = NAV }: { links?: readonly { label: string; href: string }[] } = {}) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -43,7 +45,7 @@ export default function Nav() {
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
-          {NAV.map((item) => (
+          {links.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
@@ -93,7 +95,7 @@ export default function Nav() {
         inert={!open}
       >
         <ul className="flex flex-col px-6 py-2">
-          {[...NAV, { label: "Get in touch", href: "#contact" }].map((item) => (
+          {[...links, { label: "Get in touch", href: "#contact" }].map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}

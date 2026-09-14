@@ -164,6 +164,13 @@ body {
   66%  { transform: translate3d(-3%, 3%, 0) rotate(-5deg) scale(0.96); }
 }
 
+/* Slow push-in on the v2 hero still, standing in for a reel until there
+   is one. Alternates rather than loops so it never jump-cuts back. */
+@keyframes heroPush {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.16); }
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }

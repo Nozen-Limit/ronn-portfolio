@@ -2,6 +2,34 @@
 
 Video editing & design portfolio. Built from the four Canva reference slides.
 
+## Two versions, side by side
+
+| Route | What it is |
+|---|---|
+| `/` | **v1** — a faithful build of the Canva deck. |
+| `/v2` | **v2** — the deck's structure reworked around the fact that Ronn edits video. |
+
+A switcher in the bottom-right toggles between them. It's a comparison aid —
+delete `components/VersionSwitch.tsx` and its two usages before launch.
+
+**What changed in v2, and why:**
+
+- **Work is on the page at all.** v1 had no reel, no thumbnail, no still —
+  a video editor's portfolio where you couldn't see any editing. v2 opens
+  with work behind the hero and a reel as the second section.
+- **The reel is scroll-linked.** Scrolling down moves the frames sideways,
+  rather than the fade-up every other site uses. On a motion designer's own
+  site, the motion is free proof.
+- **Prices are "from".** A fixed published figure anchors the negotiation
+  before anything is scoped and turns away clients who'd have paid more.
+- **Tiers and Pricing merged.** In v1 they were the same three names listed
+  twice in a row — an artifact of being two slides in a deck.
+- **Section rhythm varies.** A pinned reel, a full-bleed statement, an
+  asymmetric contact split, instead of seven identically-shaped sections.
+- **A process section**, because freelancers lose work to uncertainty more
+  than to price.
+- **A four-field contact form** instead of a bare `mailto:`.
+
 ```
 npm install
 npm run dev      # http://localhost:3000

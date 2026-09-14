@@ -6,6 +6,7 @@ import Tiers from "@/components/Tiers";
 import Pricing from "@/components/Pricing";
 import Clients from "@/components/Clients";
 import Contact from "@/components/Contact";
+import VersionSwitch from "@/components/VersionSwitch";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Clients />
         <Contact />
       </main>
+      <VersionSwitch />
     </>
   );
 }
